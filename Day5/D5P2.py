@@ -4,7 +4,6 @@ import numpy as np
 input = realInput
 input = input.splitlines()
 
-# --------- v1 Solution
 # X     -   Format input into list of dictionaries -> [[x1: 1, y1: 2, x2: 3, y2: 4]]
 # X     -   Filter out diagonal lines for P1
 # X     -   Determine max size of the grid

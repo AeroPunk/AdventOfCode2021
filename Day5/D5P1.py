@@ -1,12 +1,9 @@
-from numpy.lib.type_check import real
 from input import testinput, realInput
-from datetime import datetime
 import numpy as np
 
 input = realInput
 input = input.splitlines()
 
-# --------- v1 Solution
 # X     -   Format input into list of dictionaries -> [[x1: 1, y1: 2, x2: 3, y2: 4]]
 # X     -   Filter out diagonal lines for P1
 # X     -   Determine max size of the grid
@@ -91,9 +88,6 @@ def getAnswer(grid):
 
 # Run the program
 
-before = datetime.now()
-print(before)
-
 filtered = filterDiagonals(formatInput(input))
 grid = buildGrid(determineGridSize(filtered))
 
@@ -101,6 +95,3 @@ for instruction in filtered:
     updateGrid( getPositionsToUpdate(instruction) )
 
 print(getAnswer(grid))
-
-after = datetime.now()
-print(after)
