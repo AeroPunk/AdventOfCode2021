@@ -1,6 +1,4 @@
-from numpy.lib.type_check import real
 from input import testinput, realInput
-from datetime import datetime
 import numpy as np
 
 input = realInput
@@ -75,6 +73,38 @@ def getPositionsToUpdate(instruction):
         while (i <= highX):
             positions.append([i, y1])
             i += 1
+    # Diagonal line
+    else:
+        if ((x1 < x2) and (y1 > y2)):
+            x = x1
+            y = y1
+            while (x <= x2):
+                positions.append([x,y])
+                x += 1
+                y -= 1
+        elif ((x1 > x2) and (y1 < y2)):
+            x = x2
+            y = y2
+            while (x <= x1):
+                positions.append([x,y])
+                x += 1
+                y -= 1
+        elif ((x1 < x2) and (y1 < y2)):
+            x = x1
+            y = y1
+            while (x <= x2):
+                positions.append([x,y])
+                x += 1
+                y += 1
+        elif ((x1 > x2) and (y1 > y2)):
+            x = x2
+            y = y2
+            while (x <= x1):
+                positions.append([x,y])
+                x += 1
+                y += 1
+        else:
+            print(f'Found one that doesn\'t meet any conditions: {instruction}')
     return positions
 
 def updateGrid( positionsToUpdate ):
@@ -90,17 +120,11 @@ def getAnswer(grid):
     return counter
 
 # Run the program
+formattedInput = formatInput(input)
+grid = buildGrid(determineGridSize(formattedInput))
 
-before = datetime.now()
-print(before)
-
-filtered = filterDiagonals(formatInput(input))
-grid = buildGrid(determineGridSize(filtered))
-
-for instruction in filtered:
-    updateGrid( getPositionsToUpdate(instruction) )
+for instruction in formattedInput:
+    positions = getPositionsToUpdate(instruction)
+    updateGrid( positions )
 
 print(getAnswer(grid))
-
-after = datetime.now()
-print(after)
